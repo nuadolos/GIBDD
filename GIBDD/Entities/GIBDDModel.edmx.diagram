@@ -5,26 +5,19 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="331ccf47178a4d7ea20ab8b9220ba6c9" Name="Diagram1">
-        <EntityTypeShape EntityType="GIBDDModel.Account" Width="1.5" PointX="7.75" PointY="1.25" />
-        <EntityTypeShape EntityType="GIBDDModel.Car" Width="1.5" PointX="3" PointY="14.125" />
-        <EntityTypeShape EntityType="GIBDDModel.CarsManufacturer" Width="1.5" PointX="1.5" PointY="18.75" />
-        <EntityTypeShape EntityType="GIBDDModel.CarsModel" Width="1.5" PointX="0.75" PointY="14.5" />
-        <EntityTypeShape EntityType="GIBDDModel.Categories" Width="1.5" PointX="3" PointY="0.75" />
-        <EntityTypeShape EntityType="GIBDDModel.ChangedStatus" Width="1.5" PointX="5.25" PointY="7.5" />
-        <EntityTypeShape EntityType="GIBDDModel.DriverOrCar" Width="1.5" PointX="5.25" PointY="10.5" />
-        <EntityTypeShape EntityType="GIBDDModel.DriverOrLicense" Width="1.5" PointX="5.25" PointY="1.625" />
-        <EntityTypeShape EntityType="GIBDDModel.Drivers" Width="1.5" PointX="3" PointY="8.5" />
-        <EntityTypeShape EntityType="GIBDDModel.License" Width="1.5" PointX="3" PointY="4.25" />
-        <EntityTypeShape EntityType="GIBDDModel.LicenseOrCategories" Width="1.5" PointX="5.25" PointY="4.625" />
+        <EntityTypeShape EntityType="GIBDDModel.Account" Width="1.5" PointX="0.75" PointY="1.25" />
+        <EntityTypeShape EntityType="GIBDDModel.Categories" Width="1.5" PointX="3" PointY="4.5" />
+        <EntityTypeShape EntityType="GIBDDModel.ChangedStatus" Width="1.5" PointX="5.25" PointY="6.25" />
+        <EntityTypeShape EntityType="GIBDDModel.DriverOrLicense" Width="1.5" PointX="8.25" PointY="7.75" />
+        <EntityTypeShape EntityType="GIBDDModel.Drivers" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="GIBDDModel.License" Width="1.5" PointX="3" PointY="7.375" />
+        <EntityTypeShape EntityType="GIBDDModel.LicenseOrCategories" Width="1.5" PointX="5.25" PointY="9.75" />
         <EntityTypeShape EntityType="GIBDDModel.Status" Width="1.5" PointX="0.75" PointY="4.75" />
-        <AssociationConnector Association="GIBDDModel.FK_Car_CarsModel" />
-        <AssociationConnector Association="GIBDDModel.FK_DriverOrCar_Car" />
-        <AssociationConnector Association="GIBDDModel.FK_CarsModel_CarsManufacturer" />
+        <EntityTypeShape EntityType="GIBDDModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="1.25" />
         <AssociationConnector Association="GIBDDModel.FK_ChangedStatus_Categories" />
         <AssociationConnector Association="GIBDDModel.FK_LicenseOrCategories_Categories" />
         <AssociationConnector Association="GIBDDModel.FK_ChangedStatus_License" />
         <AssociationConnector Association="GIBDDModel.FK_ChangedStatus_Status" />
-        <AssociationConnector Association="GIBDDModel.FK_DriverOrCar_Drivers" />
         <AssociationConnector Association="GIBDDModel.FK_DriverOrLicense_Drivers" />
         <AssociationConnector Association="GIBDDModel.FK_DriverOrLicense_License" />
         <AssociationConnector Association="GIBDDModel.FK_License_Status" />

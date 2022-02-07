@@ -26,16 +26,13 @@ namespace GIBDD.Entities
         }
     
         public virtual DbSet<Account> Account { get; set; }
-        public virtual DbSet<Car> Car { get; set; }
-        public virtual DbSet<CarsManufacturer> CarsManufacturer { get; set; }
-        public virtual DbSet<CarsModel> CarsModel { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<ChangedStatus> ChangedStatus { get; set; }
-        public virtual DbSet<DriverOrCar> DriverOrCar { get; set; }
         public virtual DbSet<DriverOrLicense> DriverOrLicense { get; set; }
         public virtual DbSet<Drivers> Drivers { get; set; }
         public virtual DbSet<License> License { get; set; }
         public virtual DbSet<LicenseOrCategories> LicenseOrCategories { get; set; }
         public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

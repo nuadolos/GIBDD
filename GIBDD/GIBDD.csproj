@@ -67,22 +67,10 @@
     <Compile Include="Entities\Account.cs">
       <DependentUpon>GIBDDModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\Car.cs">
-      <DependentUpon>GIBDDModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\CarsManufacturer.cs">
-      <DependentUpon>GIBDDModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\CarsModel.cs">
-      <DependentUpon>GIBDDModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entities\Categories.cs">
       <DependentUpon>GIBDDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\ChangedStatus.cs">
-      <DependentUpon>GIBDDModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\DriverOrCar.cs">
       <DependentUpon>GIBDDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\DriverOrLicense.cs">
@@ -113,6 +101,9 @@
       <DependentUpon>GIBDDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Status.cs">
+      <DependentUpon>GIBDDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\sysdiagrams.cs">
       <DependentUpon>GIBDDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UI\Pages\AddEditDriver.xaml.cs">

@@ -13,34 +13,6 @@
           <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="Car">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="VIN" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="ModelId" Type="int" Nullable="false" />
-          <Property Name="Year" Type="int" Nullable="false" />
-          <Property Name="Weight" Type="int" Nullable="false" />
-          <Property Name="Color" Type="int" Nullable="false" />
-          <Property Name="EngineType" Type="int" Nullable="false" />
-          <Property Name="TypeOfDrive" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CarsManufacturer">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CarsModel">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ManufacturerId" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="Id" />
@@ -56,15 +28,6 @@
           <Property Name="LicenseId" Type="int" Nullable="false" />
           <Property Name="StatusId" Type="int" Nullable="false" />
           <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="DriverOrCar">
-          <Key>
-            <PropertyRef Name="DriverId" />
-            <PropertyRef Name="CarId" />
-          </Key>
-          <Property Name="DriverId" Type="int" Nullable="false" />
-          <Property Name="CarId" Type="int" Nullable="false" />
-          <Property Name="Nothing" Type="nvarchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="DriverOrLicense">
           <Key>
@@ -120,34 +83,16 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Car_CarsModel">
-          <End Role="CarsModel" Type="Self.CarsModel" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Car" Type="Self.Car" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CarsModel">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Car">
-              <PropertyRef Name="ModelId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CarsModel_CarsManufacturer">
-          <End Role="CarsManufacturer" Type="Self.CarsManufacturer" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="CarsModel" Type="Self.CarsModel" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CarsManufacturer">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CarsModel">
-              <PropertyRef Name="ManufacturerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <Association Name="FK_ChangedStatus_Categories">
           <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
           <End Role="ChangedStatus" Type="Self.ChangedStatus" Multiplicity="*" />
@@ -181,34 +126,6 @@
             </Principal>
             <Dependent Role="ChangedStatus">
               <PropertyRef Name="StatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DriverOrCar_Car">
-          <End Role="Car" Type="Self.Car" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="DriverOrCar" Type="Self.DriverOrCar" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Car">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DriverOrCar">
-              <PropertyRef Name="CarId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DriverOrCar_Drivers">
-          <End Role="Drivers" Type="Self.Drivers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="DriverOrCar" Type="Self.DriverOrCar" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Drivers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DriverOrCar">
-              <PropertyRef Name="DriverId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -284,25 +201,14 @@
         </Association>
         <EntityContainer Name="Хранилище GIBDDModelContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CarsManufacturer" EntityType="Self.CarsManufacturer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CarsModel" EntityType="Self.CarsModel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChangedStatus" EntityType="Self.ChangedStatus" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DriverOrCar" EntityType="Self.DriverOrCar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DriverOrLicense" EntityType="Self.DriverOrLicense" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Drivers" EntityType="Self.Drivers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="License" EntityType="Self.License" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LicenseOrCategories" EntityType="Self.LicenseOrCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Car_CarsModel" Association="Self.FK_Car_CarsModel">
-            <End Role="CarsModel" EntitySet="CarsModel" />
-            <End Role="Car" EntitySet="Car" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CarsModel_CarsManufacturer" Association="Self.FK_CarsModel_CarsManufacturer">
-            <End Role="CarsManufacturer" EntitySet="CarsManufacturer" />
-            <End Role="CarsModel" EntitySet="CarsModel" />
-          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ChangedStatus_Categories" Association="Self.FK_ChangedStatus_Categories">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="ChangedStatus" EntitySet="ChangedStatus" />
@@ -314,14 +220,6 @@
           <AssociationSet Name="FK_ChangedStatus_Status" Association="Self.FK_ChangedStatus_Status">
             <End Role="Status" EntitySet="Status" />
             <End Role="ChangedStatus" EntitySet="ChangedStatus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DriverOrCar_Car" Association="Self.FK_DriverOrCar_Car">
-            <End Role="Car" EntitySet="Car" />
-            <End Role="DriverOrCar" EntitySet="DriverOrCar" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DriverOrCar_Drivers" Association="Self.FK_DriverOrCar_Drivers">
-            <End Role="Drivers" EntitySet="Drivers" />
-            <End Role="DriverOrCar" EntitySet="DriverOrCar" />
           </AssociationSet>
           <AssociationSet Name="FK_DriverOrLicense_Drivers" Association="Self.FK_DriverOrLicense_Drivers">
             <End Role="Drivers" EntitySet="Drivers" />
@@ -350,29 +248,14 @@
       <Schema Namespace="GIBDDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="GIBDDEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Account" EntityType="GIBDDModel.Account" />
-          <EntitySet Name="Car" EntityType="GIBDDModel.Car" />
-          <EntitySet Name="CarsManufacturer" EntityType="GIBDDModel.CarsManufacturer" />
-          <EntitySet Name="CarsModel" EntityType="GIBDDModel.CarsModel" />
           <EntitySet Name="Categories" EntityType="GIBDDModel.Categories" />
           <EntitySet Name="ChangedStatus" EntityType="GIBDDModel.ChangedStatus" />
-          <EntitySet Name="DriverOrCar" EntityType="GIBDDModel.DriverOrCar" />
           <EntitySet Name="DriverOrLicense" EntityType="GIBDDModel.DriverOrLicense" />
           <EntitySet Name="Drivers" EntityType="GIBDDModel.Drivers" />
           <EntitySet Name="License" EntityType="GIBDDModel.License" />
           <EntitySet Name="LicenseOrCategories" EntityType="GIBDDModel.LicenseOrCategories" />
           <EntitySet Name="Status" EntityType="GIBDDModel.Status" />
-          <AssociationSet Name="FK_Car_CarsModel" Association="GIBDDModel.FK_Car_CarsModel">
-            <End Role="CarsModel" EntitySet="CarsModel" />
-            <End Role="Car" EntitySet="Car" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DriverOrCar_Car" Association="GIBDDModel.FK_DriverOrCar_Car">
-            <End Role="Car" EntitySet="Car" />
-            <End Role="DriverOrCar" EntitySet="DriverOrCar" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CarsModel_CarsManufacturer" Association="GIBDDModel.FK_CarsModel_CarsManufacturer">
-            <End Role="CarsManufacturer" EntitySet="CarsManufacturer" />
-            <End Role="CarsModel" EntitySet="CarsModel" />
-          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="GIBDDModel.sysdiagrams" />
           <AssociationSet Name="FK_ChangedStatus_Categories" Association="GIBDDModel.FK_ChangedStatus_Categories">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="ChangedStatus" EntitySet="ChangedStatus" />
@@ -388,10 +271,6 @@
           <AssociationSet Name="FK_ChangedStatus_Status" Association="GIBDDModel.FK_ChangedStatus_Status">
             <End Role="Status" EntitySet="Status" />
             <End Role="ChangedStatus" EntitySet="ChangedStatus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DriverOrCar_Drivers" Association="GIBDDModel.FK_DriverOrCar_Drivers">
-            <End Role="Drivers" EntitySet="Drivers" />
-            <End Role="DriverOrCar" EntitySet="DriverOrCar" />
           </AssociationSet>
           <AssociationSet Name="FK_DriverOrLicense_Drivers" Association="GIBDDModel.FK_DriverOrLicense_Drivers">
             <End Role="Drivers" EntitySet="Drivers" />
@@ -418,39 +297,6 @@
           <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Car">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VIN" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ModelId" Type="Int32" Nullable="false" />
-          <Property Name="Year" Type="Int32" Nullable="false" />
-          <Property Name="Weight" Type="Int32" Nullable="false" />
-          <Property Name="Color" Type="Int32" Nullable="false" />
-          <Property Name="EngineType" Type="Int32" Nullable="false" />
-          <Property Name="TypeOfDrive" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CarsModel" Relationship="GIBDDModel.FK_Car_CarsModel" FromRole="Car" ToRole="CarsModel" />
-          <NavigationProperty Name="DriverOrCar" Relationship="GIBDDModel.FK_DriverOrCar_Car" FromRole="Car" ToRole="DriverOrCar" />
-        </EntityType>
-        <EntityType Name="CarsManufacturer">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CarsModel" Relationship="GIBDDModel.FK_CarsModel_CarsManufacturer" FromRole="CarsManufacturer" ToRole="CarsModel" />
-        </EntityType>
-        <EntityType Name="CarsModel">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ManufacturerId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Car" Relationship="GIBDDModel.FK_Car_CarsModel" FromRole="CarsModel" ToRole="Car" />
-          <NavigationProperty Name="CarsManufacturer" Relationship="GIBDDModel.FK_CarsModel_CarsManufacturer" FromRole="CarsModel" ToRole="CarsManufacturer" />
-        </EntityType>
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="Id" />
@@ -471,17 +317,6 @@
           <NavigationProperty Name="Categories" Relationship="GIBDDModel.FK_ChangedStatus_Categories" FromRole="ChangedStatus" ToRole="Categories" />
           <NavigationProperty Name="License" Relationship="GIBDDModel.FK_ChangedStatus_License" FromRole="ChangedStatus" ToRole="License" />
           <NavigationProperty Name="Status" Relationship="GIBDDModel.FK_ChangedStatus_Status" FromRole="ChangedStatus" ToRole="Status" />
-        </EntityType>
-        <EntityType Name="DriverOrCar">
-          <Key>
-            <PropertyRef Name="DriverId" />
-            <PropertyRef Name="CarId" />
-          </Key>
-          <Property Name="DriverId" Type="Int32" Nullable="false" />
-          <Property Name="CarId" Type="Int32" Nullable="false" />
-          <Property Name="Nothing" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Car" Relationship="GIBDDModel.FK_DriverOrCar_Car" FromRole="DriverOrCar" ToRole="Car" />
-          <NavigationProperty Name="Drivers" Relationship="GIBDDModel.FK_DriverOrCar_Drivers" FromRole="DriverOrCar" ToRole="Drivers" />
         </EntityType>
         <EntityType Name="DriverOrLicense">
           <Key>
@@ -512,7 +347,6 @@
           <Property Name="Photo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsDelete" Type="Boolean" />
-          <NavigationProperty Name="DriverOrCar" Relationship="GIBDDModel.FK_DriverOrCar_Drivers" FromRole="Drivers" ToRole="DriverOrCar" />
           <NavigationProperty Name="DriverOrLicense" Relationship="GIBDDModel.FK_DriverOrLicense_Drivers" FromRole="Drivers" ToRole="DriverOrLicense" />
         </EntityType>
         <EntityType Name="License">
@@ -549,48 +383,16 @@
           <NavigationProperty Name="ChangedStatus" Relationship="GIBDDModel.FK_ChangedStatus_Status" FromRole="Status" ToRole="ChangedStatus" />
           <NavigationProperty Name="License" Relationship="GIBDDModel.FK_License_Status" FromRole="Status" ToRole="License" />
         </EntityType>
-        <Association Name="FK_Car_CarsModel">
-          <End Type="GIBDDModel.CarsModel" Role="CarsModel" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="GIBDDModel.Car" Role="Car" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CarsModel">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Car">
-              <PropertyRef Name="ModelId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DriverOrCar_Car">
-          <End Type="GIBDDModel.Car" Role="Car" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="GIBDDModel.DriverOrCar" Role="DriverOrCar" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Car">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DriverOrCar">
-              <PropertyRef Name="CarId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CarsModel_CarsManufacturer">
-          <End Type="GIBDDModel.CarsManufacturer" Role="CarsManufacturer" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="GIBDDModel.CarsModel" Role="CarsModel" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CarsManufacturer">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CarsModel">
-              <PropertyRef Name="ManufacturerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <Association Name="FK_ChangedStatus_Categories">
           <End Type="GIBDDModel.Categories" Role="Categories" Multiplicity="1" />
           <End Type="GIBDDModel.ChangedStatus" Role="ChangedStatus" Multiplicity="*" />
@@ -638,20 +440,6 @@
             </Principal>
             <Dependent Role="ChangedStatus">
               <PropertyRef Name="StatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DriverOrCar_Drivers">
-          <End Type="GIBDDModel.Drivers" Role="Drivers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="GIBDDModel.DriverOrCar" Role="DriverOrCar" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Drivers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DriverOrCar">
-              <PropertyRef Name="DriverId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -711,7 +499,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -722,37 +510,6 @@
               <MappingFragment StoreEntitySet="Account">
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Car">
-            <EntityTypeMapping TypeName="GIBDDModel.Car">
-              <MappingFragment StoreEntitySet="Car">
-                <ScalarProperty Name="TypeOfDrive" ColumnName="TypeOfDrive" />
-                <ScalarProperty Name="EngineType" ColumnName="EngineType" />
-                <ScalarProperty Name="Color" ColumnName="Color" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="ModelId" ColumnName="ModelId" />
-                <ScalarProperty Name="VIN" ColumnName="VIN" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CarsManufacturer">
-            <EntityTypeMapping TypeName="GIBDDModel.CarsManufacturer">
-              <MappingFragment StoreEntitySet="CarsManufacturer">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CarsModel">
-            <EntityTypeMapping TypeName="GIBDDModel.CarsModel">
-              <MappingFragment StoreEntitySet="CarsModel">
-                <ScalarProperty Name="ManufacturerId" ColumnName="ManufacturerId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -772,15 +529,6 @@
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="LicenseId" ColumnName="LicenseId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DriverOrCar">
-            <EntityTypeMapping TypeName="GIBDDModel.DriverOrCar">
-              <MappingFragment StoreEntitySet="DriverOrCar">
-                <ScalarProperty Name="Nothing" ColumnName="Nothing" />
-                <ScalarProperty Name="CarId" ColumnName="CarId" />
-                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -838,6 +586,17 @@
               <MappingFragment StoreEntitySet="Status">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GIBDDModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

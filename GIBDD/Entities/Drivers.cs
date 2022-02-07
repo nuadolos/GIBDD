@@ -17,7 +17,6 @@ namespace GIBDD.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Drivers()
         {
-            this.DriverOrCar = new HashSet<DriverOrCar>();
             this.DriverOrLicense = new HashSet<DriverOrLicense>();
         }
     
@@ -36,8 +35,6 @@ namespace GIBDD.Entities
         public string Comment { get; set; }
         public Nullable<bool> IsDelete { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DriverOrCar> DriverOrCar { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DriverOrLicense> DriverOrLicense { get; set; }
     }
