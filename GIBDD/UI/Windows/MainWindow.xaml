@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:GIBDD"
         mc:Ignorable="d"
         Title="{Binding Content.Title,ElementName=MainFrame}" 
-        Height="700" Width="1200" MinWidth="1200" MinHeight="700">
+        Height="700" Width="1200" MinWidth="1200" MinHeight="700"
+        Deactivated="Window_Deactivated" Activated="Window_Activated">
     <Grid Background="{StaticResource Basic1Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>

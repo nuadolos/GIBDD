@@ -21,10 +21,16 @@ namespace GIBDD.UI.Pages
     /// </summary>
     public partial class Authorization : Page
     {
+        #region Конструктор страницы Authorization
+
         public Authorization()
         {
             InitializeComponent();
         }
+
+        #endregion
+
+        #region Проверка аккаунта
 
         private void EntryBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -50,9 +56,15 @@ namespace GIBDD.UI.Pages
                 MessageBox.Show("Логин или пароль введены неверно!");
         }
 
+        #endregion
+
+        #region Закрытие приложения
+
         private void ClosingBtn_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
+
+        #endregion
     }
 }

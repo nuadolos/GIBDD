@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace GIBDD
 {
@@ -22,6 +23,13 @@ namespace GIBDD
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Поля окна MainWindow
+
+        DispatcherTimer timer;
+        DateTime oneMinute;
+
+        #endregion
+
         #region Конструктор окна MainWindow
 
         public MainWindow()
@@ -30,6 +38,11 @@ namespace GIBDD
 
             MainFrame.Navigate(new Authorization());
             Transition.MainFrame = MainFrame;
+
+            timer = new DispatcherTimer();
+
+            timer.Tick += new EventHandler(TimerTickEvent);
+            timer.Interval = new TimeSpan(1000);
         }
 
         #endregion
@@ -47,6 +60,38 @@ namespace GIBDD
         private void BackBtn_Click(object sender, RoutedEventArgs e)
         {
             Transition.MainFrame.GoBack();
+        }
+
+        #endregion
+
+        #region Активация таймера при бездействии
+
+        public void TimerTickEvent(object sender, EventArgs e)
+        {
+            if (oneMinute <= DateTime.Now)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    if (Transition.MainFrame.CanGoBack)
+                        Transition.MainFrame.GoBack();
+                    else
+                    {
+                        timer.Stop();
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void Window_Deactivated(object sender, EventArgs e)
+        {
+            oneMinute = DateTime.Now.AddSeconds(10);
+            timer.Start();
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            timer.Stop();
         }
 
         #endregion

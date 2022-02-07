@@ -27,6 +27,7 @@ namespace GIBDD.UI.Pages
         private Drivers addDriver;
         private string pathProject = System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory + @"..\..\UI\photo\"));
 
+
         public AddEditDriver(Drivers transferDr)
         {
             InitializeComponent();
