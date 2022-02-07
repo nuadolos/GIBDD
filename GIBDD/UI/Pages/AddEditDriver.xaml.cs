@@ -24,9 +24,14 @@ namespace GIBDD.UI.Pages
     /// </summary>
     public partial class AddEditDriver : Page
     {
+        #region Поля страницы AddEditDriver
+
         private Drivers addDriver;
         private string pathProject = System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory + @"..\..\UI\photo\"));
 
+        #endregion
+
+        #region Конструктор страницы AddEditDriver
 
         public AddEditDriver(Drivers transferDr)
         {
@@ -42,6 +47,10 @@ namespace GIBDD.UI.Pages
 
             DataContext = addDriver;
         }
+
+        #endregion
+
+        #region Сохранение данных о водителе
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -94,6 +103,10 @@ namespace GIBDD.UI.Pages
             }
         }
 
+        #endregion
+
+        #region Загрузка фото
+
         private void DownloadImageBtn_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -109,5 +122,7 @@ namespace GIBDD.UI.Pages
                 ImageAgent.Source = (ImageSource)new ImageSourceConverter().ConvertFromString(pathProject + ofd.SafeFileName);
             }
         }
+
+        #endregion
     }
 }

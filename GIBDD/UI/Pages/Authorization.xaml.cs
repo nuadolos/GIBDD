@@ -21,11 +21,19 @@ namespace GIBDD.UI.Pages
     /// </summary>
     public partial class Authorization : Page
     {
+        #region Поля страницы Authorization
+
+        int countTry;
+
+        #endregion
+
         #region Конструктор страницы Authorization
 
         public Authorization()
         {
             InitializeComponent();
+
+            countTry = 3;
         }
 
         #endregion
@@ -53,7 +61,13 @@ namespace GIBDD.UI.Pages
             if (account != null)
                 Transition.MainFrame.Navigate(new DriverView());
             else
-                MessageBox.Show("Логин или пароль введены неверно!");
+                MessageBox.Show($"Логин или пароль введены неверно!\nКоличество оставшихся попыток: {--countTry}");
+
+            if (countTry <= 0)
+            {
+                MessageBox.Show("Лимит попыток превышен!\nПовторить попытку возможно через 60 секунд");
+                countTry = 3;
+            }
         }
 
         #endregion
